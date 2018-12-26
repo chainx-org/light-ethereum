@@ -12,3 +12,6 @@ parity-bytes = "0.1"
 rlp = { version = "0.3.0", features = ["ethereum"] }
 common-types = { path = "types" }
 parity-machine = { path = "machine" }
+jsonrpc-core = { git = "https://github.com/paritytech/jsonrpc" }
+jsonrpc-minihttp-server = { git = "https://github.com/paritytech/jsonrpc" }
+jsonrpc-macros = { git = "https://github.com/paritytech/jsonrpc" }
