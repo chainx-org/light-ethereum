@@ -5,3 +5,10 @@ authors = ["gguoss <guanghuaguo.oss@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+keccak-hash = "0.1"
+heapsize = "0.4"
+ethereum-types = "0.4"
+parity-bytes = "0.1"
+rlp = { version = "0.3.0", features = ["ethereum"] }
+common-types = { path = "types" }
+parity-machine = { path = "machine" }
