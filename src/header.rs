@@ -17,6 +17,7 @@
 //! Block header.
 
 use crate::encoded;
+use crate::rpc_bytes;
 use bytes::Bytes;
 use ethereum_types::{Address, Bloom, H256, U256};
 use hash::{keccak, KECCAK_EMPTY_LIST_RLP, KECCAK_NULL_RLP};
@@ -150,6 +151,8 @@ impl Header {
     pub fn deserialize(ser: &Map<String, Value>) -> Self {
         let timestamp: U256 = from_value(ser["timestamp"].clone()).unwrap();
         let number: U256 = from_value(ser["number"].clone()).unwrap();
+        let extra_data: rpc_bytes::Bytes = from_value(ser["extraData"].clone()).unwrap();
+        let seal: Vec<rpc_bytes::Bytes> = from_value(ser["sealFields"].clone()).unwrap();
         Header {
             parent_hash: from_value(ser["parentHash"].clone()).unwrap(),
             timestamp: timestamp.as_u64(),
@@ -158,7 +161,7 @@ impl Header {
 
             transactions_root: from_value(ser["transactionsRoot"].clone()).unwrap(),
             uncles_hash: from_value(ser["sha3Uncles"].clone()).unwrap(),
-            extra_data: from_value(ser["extraData"].clone()).unwrap(),
+            extra_data: extra_data.into(),
 
             state_root: from_value(ser["stateRoot"].clone()).unwrap(),
             receipts_root: from_value(ser["receiptsRoot"].clone()).unwrap(),
@@ -167,7 +170,7 @@ impl Header {
             gas_limit: from_value(ser["gasLimit"].clone()).unwrap(),
 
             difficulty: from_value(ser["difficulty"].clone()).unwrap(),
-            seal: from_value(ser["sealFields"].clone()).unwrap(),
+            seal: seal.iter().map(|bytes| bytes.clone().into()).collect(),
             hash: from_value(ser["hash"].clone()).unwrap(),
         }
     }

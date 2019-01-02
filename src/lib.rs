@@ -9,11 +9,16 @@ extern crate parity_machine;
 extern crate jsonrpc_macros;
 #[cfg(feature = "serialize")]
 extern crate ethereum_types;
+extern crate rustc_hex;
+extern crate serde;
+#[macro_use]
+extern crate serde_derive;
 
 pub mod header;
 #[macro_use]
 pub mod views;
 pub mod encoded;
+mod rpc_bytes;
 
 use jsonrpc_core::{IoHandler, Result};
 use jsonrpc_minihttp_server::ServerBuilder;
