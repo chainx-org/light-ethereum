@@ -7,6 +7,8 @@ extern crate jsonrpc_core;
 extern crate jsonrpc_minihttp_server;
 #[macro_use]
 extern crate jsonrpc_macros;
+#[cfg(feature="serialize")]
+extern crate ethereum_types;
 
 pub mod header;
 #[macro_use]

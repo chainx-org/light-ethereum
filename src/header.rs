@@ -22,6 +22,8 @@ use heapsize::HeapSizeOf;
 use ethereum_types::{H256, U256, Address, Bloom};
 use bytes::Bytes;
 use rlp::{Rlp, RlpStream, Encodable, DecoderError, Decodable};
+use crate::encoded;
+use jsonrpc_core::serde_json::{Value, Map, from_value};
 
 pub use types::BlockNumber;
 
@@ -142,6 +144,31 @@ impl Default for Header {
 impl Header {
 	/// Create a new, default-valued, header.
 	pub fn new() -> Self { Self::default() }
+
+    pub fn deserialize(ser: &Map<String, Value>) -> Self {
+        let timestamp: U256 = from_value(ser["timestamp"].clone()).unwrap();
+        let number: U256 = from_value(ser["number"].clone()).unwrap();
+		Header {
+			parent_hash: from_value(ser["parentHash"].clone()).unwrap(),
+			timestamp: timestamp.as_u64(),
+			number: number.as_u64(),
+			author: from_value(ser["author"].clone()).unwrap(),
+
+			transactions_root: from_value(ser["transactionsRoot"].clone()).unwrap(),
+			uncles_hash: from_value(ser["unclesHash"].clone()).unwrap(),
+			extra_data: from_value(ser["extraData"].clone()).unwrap(),
+
+			state_root: from_value(ser["stateRoot"].clone()).unwrap(),
+			receipts_root: from_value(ser["receiptsRoot"].clone()).unwrap(),
+			log_bloom: from_value(ser["logsBloom"].clone()).unwrap(),
+			gas_used: from_value(ser["gasUsed"].clone()).unwrap(),
+			gas_limit: from_value(ser["gasLimit"].clone()).unwrap(),
+
+			difficulty: from_value(ser["difficulty"].clone()).unwrap(),
+			seal: from_value(ser["sealFields"].clone()).unwrap(),
+			hash: from_value(ser["hash"].clone()).unwrap(),
+		}
+    }
 
 	/// Get the parent_hash field of the header.
 	pub fn parent_hash(&self) -> &H256 { &self.parent_hash }
@@ -286,11 +313,10 @@ impl Header {
 		keccak(self.rlp(Seal::Without))
 	}
 
-/*
 	/// Encode the header, getting a type-safe wrapper around the RLP.
-	pub fn encoded(&self) -> ::encoded::Header {
-		::encoded::Header::new(self.rlp(Seal::With))
-	}*/
+	pub fn encoded(&self) -> encoded::Header {
+		encoded::Header::new(self.rlp(Seal::With))
+	}
 
 	/// Get the RLP representation of this Header.
 	fn rlp(&self, with_seal: Seal) -> Bytes {
