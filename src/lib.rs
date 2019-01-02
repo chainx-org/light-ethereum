@@ -8,7 +8,10 @@ extern crate jsonrpc_minihttp_server;
 #[macro_use]
 extern crate jsonrpc_macros;
 
-mod header;
+pub mod header;
+#[macro_use]
+pub mod views;
+pub mod encoded;
 
 use jsonrpc_core::{IoHandler, Result};
 use jsonrpc_minihttp_server::{ServerBuilder};
