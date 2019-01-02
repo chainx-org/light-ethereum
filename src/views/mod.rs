@@ -31,11 +31,11 @@ pub use self::header::HeaderView;
 
 #[cfg(test)]
 mod tests {
-	use super::HeaderView;
+    use super::HeaderView;
 
-	#[test]
-	#[should_panic]
-	fn should_include_file_line_number_in_panic_for_invalid_rlp() {
-		let _ = view!(HeaderView, &[]).parent_hash();
-	}
+    #[test]
+    #[should_panic]
+    fn should_include_file_line_number_in_panic_for_invalid_rlp() {
+        let _ = view!(HeaderView, &[]).parent_hash();
+    }
 }
