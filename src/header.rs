@@ -54,7 +54,7 @@ pub struct ExtendedHeader {
 /// which is non-specific.
 ///
 /// Doesn't do all that much on its own.
-#[derive(Debug, Clone, Eq)]
+#[derive(Debug, Clone, Eq, Serialize, Deserialize)]
 pub struct Header {
     /// Parent hash.
     parent_hash: H256,
