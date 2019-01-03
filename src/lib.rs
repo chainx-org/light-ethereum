@@ -13,6 +13,9 @@ extern crate rustc_hex;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
+extern crate parity_codec as codec;
+#[macro_use]
+extern crate parity_codec_derive;
 
 pub mod header;
 #[macro_use]

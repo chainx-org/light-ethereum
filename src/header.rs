@@ -25,6 +25,7 @@ use heapsize::HeapSizeOf;
 use jsonrpc_core::serde_json::{from_value, Map, Value};
 use rlp::{Decodable, DecoderError, Encodable, Rlp, RlpStream};
 use std::cmp;
+use codec::{Encode, Decode};
 
 pub use types::BlockNumber;
 
@@ -54,7 +55,7 @@ pub struct ExtendedHeader {
 /// which is non-specific.
 ///
 /// Doesn't do all that much on its own.
-#[derive(Debug, Clone, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Eq, Serialize, Deserialize, Encode, Decode)]
 pub struct Header {
     /// Parent hash.
     parent_hash: H256,

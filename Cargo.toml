@@ -7,14 +7,16 @@ edition = "2018"
 [dependencies]
 keccak-hash = "0.1"
 heapsize = "0.4"
-ethereum-types = "0.4"
 parity-bytes = "0.1"
 rlp = { version = "0.3.0", features = ["ethereum"] }
 common-types = { path = "types" }
+ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 parity-machine = { path = "machine" }
 jsonrpc-core = { git = "https://github.com/paritytech/jsonrpc" }
 jsonrpc-minihttp-server = { git = "https://github.com/paritytech/jsonrpc" }
 jsonrpc-macros = { git = "https://github.com/paritytech/jsonrpc" }
+parity-codec = { version = "2.1", default-features = false }
+parity-codec-derive = { version = "2.1" }
 serde = "1.0"
 serde_derive = "1.0"
 rustc-hex = "1.0"
