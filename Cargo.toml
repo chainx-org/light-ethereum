@@ -5,10 +5,10 @@ authors = ["gguoss <guanghuaguo.oss@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-keccak-hash = "0.1"
+keccak-hash = { git = "https://github.com/chainx-org/keccak-hash" }
 heapsize = "0.4"
 parity-bytes = "0.1"
-rlp = { version = "0.3.0", features = ["ethereum"] }
+rlp = { git = "https://github.com/chainx-org/rlp" }
 common-types = { path = "types" }
 ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 parity-machine = { path = "machine" }

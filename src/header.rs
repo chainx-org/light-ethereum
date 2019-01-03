@@ -25,7 +25,6 @@ use heapsize::HeapSizeOf;
 use jsonrpc_core::serde_json::{from_value, Map, Value};
 use rlp::{Decodable, DecoderError, Encodable, Rlp, RlpStream};
 use std::cmp;
-use codec::{Encode, Decode};
 
 pub use types::BlockNumber;
 

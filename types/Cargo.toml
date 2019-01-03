@@ -5,7 +5,7 @@ version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 
 [dependencies]
-rlp = { version = "0.3.0", features = ["ethereum"] }
+rlp = { git = "https://github.com/chainx-org/rlp" }
 rlp_derive = { path = "../rlp_derive" }
 parity-bytes = "0.1"
 ethereum-types = { git = "https://github.com/chainx-org/primitives" }
