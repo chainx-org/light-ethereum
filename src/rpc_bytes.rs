@@ -100,6 +100,7 @@ impl<'a> Visitor<'a> for BytesVisitor {
     }
 }
 
+/*
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -130,4 +131,4 @@ mod tests {
         assert_eq!(bytes5, Bytes(vec![0x12]));
         assert_eq!(bytes6, Bytes(vec![0x1, 0x23]));
     }
-}
+}*/

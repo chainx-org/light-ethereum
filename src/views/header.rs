@@ -29,22 +29,6 @@ pub struct HeaderView<'a> {
 }
 
 impl<'a> HeaderView<'a> {
-    /// Creates a new Header view from valid ViewRlp
-    /// Use the `view!` macro to create this view in order to capture debugging info.
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// #[macro_use]
-    /// extern crate ethcore;
-    ///
-    /// use ethcore::views::{HeaderView};
-    ///
-    /// fn main() {
-    /// let bytes : &[u8] = &[];
-    /// let tx_view = view!(HeaderView, bytes);
-    /// }
-    /// ```
     pub fn new(rlp: ViewRlp<'a>) -> HeaderView<'a> {
         HeaderView { rlp }
     }
