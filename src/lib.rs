@@ -21,6 +21,7 @@ pub mod header;
 #[macro_use]
 pub mod views;
 pub mod encoded;
+pub mod header_chain;
 mod rpc_bytes;
 
 use jsonrpc_core::{IoHandler, Result};
