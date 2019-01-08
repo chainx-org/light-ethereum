@@ -1,15 +1,24 @@
 // Copyright 2018 Chainpool
+
+#![recursion_limit="128"]
+
 extern crate common_types as types;
 extern crate jsonrpc_core;
 extern crate jsonrpc_minihttp_server;
 extern crate keccak_hash as hash;
 extern crate parity_bytes as bytes;
+extern crate ethash;
+extern crate ethkey;
+extern crate unexpected;
+extern crate ethjson;
 extern crate parity_machine;
 #[macro_use]
 extern crate jsonrpc_macros;
 #[cfg(feature = "serialize")]
 extern crate ethereum_types;
 extern crate rustc_hex;
+#[macro_use]
+extern crate error_chain;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
@@ -22,6 +31,8 @@ pub mod header;
 pub mod views;
 pub mod encoded;
 pub mod header_chain;
+pub mod ethash_wrapper;
+pub mod error;
 mod rpc_bytes;
 
 use jsonrpc_core::{IoHandler, Result};

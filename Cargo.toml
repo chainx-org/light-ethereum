@@ -10,6 +10,10 @@ heapsize = "0.4"
 parity-bytes = "0.1"
 rlp = { git = "https://github.com/chainx-org/rlp" }
 common-types = { path = "types" }
+ethash = { path = "ethash" }
+ethkey = { path = "ethkey" }
+ethjson = { path = "json" }
+unexpected = { path = "unexpected" }
 ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 parity-machine = { path = "machine" }
 jsonrpc-core = { git = "https://github.com/paritytech/jsonrpc" }
@@ -17,6 +21,7 @@ jsonrpc-minihttp-server = { git = "https://github.com/paritytech/jsonrpc" }
 jsonrpc-macros = { git = "https://github.com/paritytech/jsonrpc" }
 parity-codec = { version = "2.1", default-features = false }
 parity-codec-derive = { version = "2.1" }
+error-chain = { version = "0.12", default-features = false }
 serde = "1.0"
 serde_derive = "1.0"
 rustc-hex = "1.0"
