@@ -33,6 +33,8 @@ pub mod encoded;
 pub mod header_chain;
 pub mod ethash_wrapper;
 pub mod error;
+pub mod rpc_log;
+pub mod rpc_receipt;
 mod rpc_bytes;
 
 use jsonrpc_core::{IoHandler, Result};
