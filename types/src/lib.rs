@@ -24,6 +24,8 @@ extern crate rlp;
 extern crate rlp_derive;
 extern crate keccak_hash as hash;
 extern crate heapsize;
+extern crate ethkey;
+extern crate unexpected;
 
 #[cfg(test)]
 extern crate rustc_hex;
@@ -46,6 +48,7 @@ pub mod trace_filter;
 pub mod tree_route;
 pub mod verification_queue_info;
 pub mod ancestry_action;
+pub mod transaction;
 
 /// Type for block number.
 pub type BlockNumber = u64;
