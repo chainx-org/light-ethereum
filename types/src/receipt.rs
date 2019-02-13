@@ -110,11 +110,12 @@ impl Decodable for Receipt {
 	}
 }
 
+/*
 impl HeapSizeOf for Receipt {
 	fn heap_size_of_children(&self) -> usize {
 		self.logs.heap_size_of_children()
 	}
-}
+}*/
 
 /// Receipt with additional info.
 #[derive(Debug, Clone, PartialEq)]

@@ -4,7 +4,7 @@
 
 extern crate common_types as types;
 extern crate jsonrpc_core;
-extern crate jsonrpc_minihttp_server;
+extern crate jsonrpc_http_server;
 extern crate keccak_hash as hash;
 extern crate parity_bytes as bytes;
 extern crate ethash;
@@ -38,7 +38,7 @@ pub mod rpc_receipt;
 mod rpc_bytes;
 
 use jsonrpc_core::{IoHandler, Result};
-use jsonrpc_minihttp_server::ServerBuilder;
+use jsonrpc_http_server::ServerBuilder;
 
 build_rpc_trait! {
     pub trait Rpc {
@@ -64,5 +64,5 @@ fn main() {
         .start_http(&"127.0.0.1:3030".parse().unwrap())
         .unwrap();
 
-    server.wait().unwrap();
+    server.wait();
 }

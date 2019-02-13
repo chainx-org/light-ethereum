@@ -35,11 +35,12 @@ pub struct LogEntry {
 	pub data: Bytes,
 }
 
+/*
 impl HeapSizeOf for LogEntry {
 	fn heap_size_of_children(&self) -> usize {
 		self.topics.heap_size_of_children() + self.data.heap_size_of_children()
 	}
-}
+}*/
 
 impl LogEntry {
 	/// Calculates the bloom of this log entry.

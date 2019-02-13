@@ -17,10 +17,10 @@ unexpected = { path = "unexpected" }
 ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 parity-machine = { path = "machine" }
 jsonrpc-core = { git = "https://github.com/paritytech/jsonrpc" }
-jsonrpc-minihttp-server = { git = "https://github.com/paritytech/jsonrpc" }
+jsonrpc-http-server = { git = "https://github.com/paritytech/jsonrpc" }
 jsonrpc-macros = { git = "https://github.com/paritytech/jsonrpc" }
-parity-codec = { version = "2.1", default-features = false }
-parity-codec-derive = { version = "2.1" }
+parity-codec = { version = "3.0", default-features = false }
+parity-codec-derive = { version = "3.0" }
 error-chain = { version = "0.12", default-features = false }
 serde = "1.0"
 serde_derive = "1.0"
