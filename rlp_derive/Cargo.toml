@@ -13,4 +13,5 @@ quote = "0.6"
 proc-macro2 = "0.4"
 
 [dev-dependencies]
-rlp = { git = "https://github.com/chainx-org/rlp" }
+#rlp = { git = "https://github.com/chainx-org/rlp" }
+rlp = { path = "../rlp" }

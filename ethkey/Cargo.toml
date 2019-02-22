@@ -7,8 +7,6 @@ authors = ["Parity Technologies <admin@parity.io>"]
 byteorder = "1.0"
 edit-distance = "2.0"
 parity-crypto = "0.3.0"
-eth-secp256k1 = { git = "https://github.com/paritytech/rust-secp256k1" }
-ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 lazy_static = "1.0"
 log = "0.4"
 parity-wordlist = "1.2"
@@ -18,3 +16,7 @@ rustc-hex = "1.0"
 serde = "1.0"
 serde_derive = "1.0"
 tiny-keccak = "1.4"
+
+eth-secp256k1 = { git = "https://github.com/paritytech/rust-secp256k1" }
+#ethereum-types = { git = "https://github.com/chainx-org/primitives" }
+ethereum-types = { path = "../ethereum-types" }

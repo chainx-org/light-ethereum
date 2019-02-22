@@ -22,7 +22,7 @@ use bytes::Bytes;
 use ethereum_types::{Address, Bloom, H256, U256};
 use hash::{keccak, KECCAK_EMPTY_LIST_RLP, KECCAK_NULL_RLP};
 use heapsize::HeapSizeOf;
-use jsonrpc_core::serde_json::{from_value, Map, Value};
+use serde_json::{from_value, Map, Value};
 use rlp::{Decodable, DecoderError, Encodable, Rlp, RlpStream};
 use std::cmp;
 

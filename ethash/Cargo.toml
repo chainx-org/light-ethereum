@@ -6,12 +6,13 @@ authors = ["Parity Technologies <admin@parity.io>"]
 [dependencies]
 crunchy = "0.1.0"
 either = "1.0.0"
-ethereum-types = { git = "https://github.com/chainx-org/primitives" }
-keccak-hash = "0.1"
 log = "0.4"
 memmap = "0.6"
 parking_lot = "0.7"
 primal = "0.2.3"
+keccak-hash = "0.1"
+#ethereum-types = { git = "https://github.com/chainx-org/primitives" }
+ethereum-types = { path = "../ethereum-types" }
 
 [dev-dependencies]
 tempdir = "0.3"
