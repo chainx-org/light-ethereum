@@ -13,7 +13,7 @@ rlp_derive = { path = "../rlp_derive" }
 #ethereum-types = { git = "https://github.com/chainx-org/primitives" }
 ethereum-types = { path = "../ethereum-types" }
 ethjson = { path = "../json" }
-ethkey = { path = "../ethkey" }
+#ethkey = { path = "../ethkey" }
 unexpected = { path = "../unexpected" }
 #keccak-hash = { git = "https://github.com/chainx-org/keccak-hash" }
 keccak-hash = { path = "../keccak-hash" }

@@ -24,7 +24,7 @@ extern crate rlp;
 extern crate rlp_derive;
 extern crate keccak_hash as hash;
 extern crate heapsize;
-extern crate ethkey;
+//extern crate ethkey;
 extern crate unexpected;
 
 #[cfg(test)]

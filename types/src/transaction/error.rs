@@ -17,7 +17,7 @@
 use std::{fmt, error};
 
 use ethereum_types::U256;
-use ethkey;
+//use ethkey;
 use rlp;
 use unexpected::OutOfBounds;
 
@@ -81,11 +81,11 @@ pub enum Error {
 	InvalidRlp(String),
 }
 
-impl From<ethkey::Error> for Error {
-	fn from(err: ethkey::Error) -> Self {
-		Error::InvalidSignature(format!("{}", err))
-	}
-}
+//impl From<ethkey::Error> for Error {
+//	fn from(err: ethkey::Error) -> Self {
+//		Error::InvalidSignature(format!("{}", err))
+//	}
+//}
 
 impl From<rlp::DecoderError> for Error {
 	fn from(err: rlp::DecoderError) -> Self {

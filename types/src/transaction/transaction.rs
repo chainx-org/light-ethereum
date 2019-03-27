@@ -20,7 +20,7 @@ use std::ops::Deref;
 
 use ethereum_types::{H256, H160, Address, U256};
 use ethjson;
-use ethkey::{self, Signature, Secret, Public, recover, public_to_address};
+//use ethkey::{self, Signature, Secret, Public, recover, public_to_address};
 use hash::keccak;
 use heapsize::HeapSizeOf;
 use rlp::{self, RlpStream, Rlp, DecoderError, Encodable};
@@ -139,27 +139,27 @@ impl HeapSizeOf for Transaction {
 	}
 }
 
-impl From<ethjson::state::Transaction> for SignedTransaction {
-	fn from(t: ethjson::state::Transaction) -> Self {
-		let to: Option<ethjson::hash::Address> = t.to.into();
-		let secret = t.secret.map(|s| Secret::from(s.0));
-		let tx = Transaction {
-			nonce: t.nonce.into(),
-			gas_price: t.gas_price.into(),
-			gas: t.gas_limit.into(),
-			action: match to {
-				Some(to) => Action::Call(to.into()),
-				None => Action::Create
-			},
-			value: t.value.into(),
-			data: t.data.into(),
-		};
-		match secret {
-			Some(s) => tx.sign(&s, None),
-			None => tx.null_sign(1),
-		}
-	}
-}
+//impl From<ethjson::state::Transaction> for SignedTransaction {
+//	fn from(t: ethjson::state::Transaction) -> Self {
+//		let to: Option<ethjson::hash::Address> = t.to.into();
+//		let secret = t.secret.map(|s| Secret::from(s.0));
+//		let tx = Transaction {
+//			nonce: t.nonce.into(),
+//			gas_price: t.gas_price.into(),
+//			gas: t.gas_limit.into(),
+//			action: match to {
+//				Some(to) => Action::Call(to.into()),
+//				None => Action::Create
+//			},
+//			value: t.value.into(),
+//			data: t.data.into(),
+//		};
+//		match secret {
+//			Some(s) => tx.sign(&s, None),
+//			None => tx.null_sign(1),
+//		}
+//	}
+//}
 
 impl From<ethjson::transaction::Transaction> for UnverifiedTransaction {
 	fn from(t: ethjson::transaction::Transaction) -> Self {
@@ -200,23 +200,23 @@ impl Transaction {
 	}
 
 	/// Signs the transaction as coming from `sender`.
-	pub fn sign(self, secret: &Secret, chain_id: Option<u64>) -> SignedTransaction {
-		let sig = ::ethkey::sign(secret, &self.hash(chain_id))
-			.expect("data is valid and context has signing capabilities; qed");
-		SignedTransaction::new(self.with_signature(sig, chain_id))
-			.expect("secret is valid so it's recoverable")
-	}
+//	pub fn sign(self, secret: &Secret, chain_id: Option<u64>) -> SignedTransaction {
+//		let sig = ::ethkey::sign(secret, &self.hash(chain_id))
+//			.expect("data is valid and context has signing capabilities; qed");
+//		SignedTransaction::new(self.with_signature(sig, chain_id))
+//			.expect("secret is valid so it's recoverable")
+//	}
 
 	/// Signs the transaction with signature.
-	pub fn with_signature(self, sig: Signature, chain_id: Option<u64>) -> UnverifiedTransaction {
-		UnverifiedTransaction {
-			unsigned: self,
-			r: sig.r().into(),
-			s: sig.s().into(),
-			v: signature::add_chain_replay_protection(sig.v() as u64, chain_id),
-			hash: 0.into(),
-		}.compute_hash()
-	}
+//	pub fn with_signature(self, sig: Signature, chain_id: Option<u64>) -> UnverifiedTransaction {
+//		UnverifiedTransaction {
+//			unsigned: self,
+//			r: sig.r().into(),
+//			s: sig.s().into(),
+//			v: signature::add_chain_replay_protection(sig.v() as u64, chain_id),
+//			hash: 0.into(),
+//		}.compute_hash()
+//	}
 
 	/// Useful for test incorrectly signed transactions.
 	#[cfg(test)]
@@ -230,35 +230,35 @@ impl Transaction {
 		}.compute_hash()
 	}
 
-	/// Specify the sender; this won't survive the serialize/deserialize process, but can be cloned.
-	pub fn fake_sign(self, from: Address) -> SignedTransaction {
-		SignedTransaction {
-			transaction: UnverifiedTransaction {
-				unsigned: self,
-				r: U256::one(),
-				s: U256::one(),
-				v: 0,
-				hash: 0.into(),
-			}.compute_hash(),
-			sender: from,
-			public: None,
-		}
-	}
+//	/ Specify the sender; this won't survive the serialize/deserialize process, but can be cloned.
+//	pub fn fake_sign(self, from: Address) -> SignedTransaction {
+//		SignedTransaction {
+//			transaction: UnverifiedTransaction {
+//				unsigned: self,
+//				r: U256::one(),
+//				s: U256::one(),
+//				v: 0,
+//				hash: 0.into(),
+//			}.compute_hash(),
+//			sender: from,
+//			public: None,
+//		}
+//	}
 
-	/// Add EIP-86 compatible empty signature.
-	pub fn null_sign(self, chain_id: u64) -> SignedTransaction {
-		SignedTransaction {
-			transaction: UnverifiedTransaction {
-				unsigned: self,
-				r: U256::zero(),
-				s: U256::zero(),
-				v: chain_id,
-				hash: 0.into(),
-			}.compute_hash(),
-			sender: UNSIGNED_SENDER,
-			public: None,
-		}
-	}
+//	/ Add EIP-86 compatible empty signature.
+//	pub fn null_sign(self, chain_id: u64) -> SignedTransaction {
+//		SignedTransaction {
+//			transaction: UnverifiedTransaction {
+//				unsigned: self,
+//				r: U256::zero(),
+//				s: U256::zero(),
+//				v: chain_id,
+//				hash: 0.into(),
+//			}.compute_hash(),
+//			sender: UNSIGNED_SENDER,
+//			public: None,
+//		}
+//	}
 }
 
 /// Signed transaction information without verified signature.
@@ -366,55 +366,56 @@ impl UnverifiedTransaction {
 	}
 
 	/// Construct a signature object from the sig.
-	pub fn signature(&self) -> Signature {
-		Signature::from_rsv(&self.r.into(), &self.s.into(), self.standard_v())
-	}
+//	pub fn signature(&self) -> Signature {
+//		Signature::from_rsv(&self.r.into(), &self.s.into(), self.standard_v())
+//	}
 
 	/// Checks whether the signature has a low 's' value.
-	pub fn check_low_s(&self) -> Result<(), ethkey::Error> {
-		if !self.signature().is_low_s() {
-			Err(ethkey::Error::InvalidSignature.into())
-		} else {
-			Ok(())
-		}
-	}
+//	pub fn check_low_s(&self) -> Result<(), ethkey::Error> {
+//		if !self.signature().is_low_s() {
+//			Err(ethkey::Error::InvalidSignature.into())
+//		} else {
+//			Ok(())
+//		}
+//	}
 
 	/// Get the hash of this transaction (keccak of the RLP).
 	pub fn hash(&self) -> H256 {
 		self.hash
 	}
 
-	/// Recovers the public key of the sender.
-	pub fn recover_public(&self) -> Result<Public, ethkey::Error> {
-		Ok(recover(&self.signature(), &self.unsigned.hash(self.chain_id()))?)
-	}
+//	/ Recovers the public key of the sender.
+//	pub fn recover_public(&self) -> Result<Public, ethkey::Error> {
+//		Ok(recover(&self.signature(), &self.unsigned.hash(self.chain_id()))?)
+//	}
 
     pub fn raw_msg(&self) -> Vec<u8> {
          self.unsigned.raw_msg(self.chain_id())
     }
 
-	/// Verify basic signature params. Does not attempt sender recovery.
-	pub fn verify_basic(&self, check_low_s: bool, chain_id: Option<u64>, allow_empty_signature: bool) -> Result<(), error::Error> {
-		if check_low_s && !(allow_empty_signature && self.is_unsigned()) {
-			self.check_low_s()?;
-		}
-		// Disallow unsigned transactions in case EIP-86 is disabled.
-		if !allow_empty_signature && self.is_unsigned() {
-			return Err(ethkey::Error::InvalidSignature.into());
-		}
-		// EIP-86: Transactions of this form MUST have gasprice = 0, nonce = 0, value = 0, and do NOT increment the nonce of account 0.
-		if allow_empty_signature && self.is_unsigned() && !(self.gas_price.is_zero() && self.value.is_zero() && self.nonce.is_zero()) {
-			return Err(ethkey::Error::InvalidSignature.into())
-		}
-		match (self.chain_id(), chain_id) {
-			(None, _) => {},
-			(Some(n), Some(m)) if n == m => {},
-			_ => return Err(error::Error::InvalidChainId),
-		};
-		Ok(())
-	}
+//	/ Verify basic signature params. Does not attempt sender recovery.
+//	pub fn verify_basic(&self, check_low_s: bool, chain_id: Option<u64>, allow_empty_signature: bool) -> Result<(), error::Error> {
+//		if check_low_s && !(allow_empty_signature && self.is_unsigned()) {
+//			self.check_low_s()?;
+//		}
+//		// Disallow unsigned transactions in case EIP-86 is disabled.
+//		if !allow_empty_signature && self.is_unsigned() {
+//			return Err(ethkey::Error::InvalidSignature.into());
+//		}
+//		// EIP-86: Transactions of this form MUST have gasprice = 0, nonce = 0, value = 0, and do NOT increment the nonce of account 0.
+//		if allow_empty_signature && self.is_unsigned() && !(self.gas_price.is_zero() && self.value.is_zero() && self.nonce.is_zero()) {
+//			return Err(ethkey::Error::InvalidSignature.into())
+//		}
+//		match (self.chain_id(), chain_id) {
+//			(None, _) => {},
+//			(Some(n), Some(m)) if n == m => {},
+//			_ => return Err(error::Error::InvalidChainId),
+//		};
+//		Ok(())
+//	}
 }
 
+/*
 /// A `UnverifiedTransaction` with successfully recovered `sender`.
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct SignedTransaction {
@@ -486,6 +487,7 @@ impl SignedTransaction {
 		(self.transaction, self.sender, self.public)
 	}
 }
+*/
 
 /// Signed Transaction that is a part of canon blockchain.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -503,20 +505,20 @@ pub struct LocalizedTransaction {
 }
 
 impl LocalizedTransaction {
-	/// Returns transaction sender.
-	/// Panics if `LocalizedTransaction` is constructed using invalid `UnverifiedTransaction`.
-	pub fn sender(&mut self) -> Address {
-		if let Some(sender) = self.cached_sender {
-			return sender;
-		}
-		if self.is_unsigned() {
-			return UNSIGNED_SENDER.clone();
-		}
-		let sender = public_to_address(&self.recover_public()
-			.expect("LocalizedTransaction is always constructed from transaction from blockchain; Blockchain only stores verified transactions; qed"));
-		self.cached_sender = Some(sender);
-		sender
-	}
+//	/ Returns transaction sender.
+//	/ Panics if `LocalizedTransaction` is constructed using invalid `UnverifiedTransaction`.
+//	pub fn sender(&mut self) -> Address {
+//		if let Some(sender) = self.cached_sender {
+//			return sender;
+//		}
+//		if self.is_unsigned() {
+//			return UNSIGNED_SENDER.clone();
+//		}
+//		let sender = public_to_address(&self.recover_public()
+//			.expect("LocalizedTransaction is always constructed from transaction from blockchain; Blockchain only stores verified transactions; qed"));
+//		self.cached_sender = Some(sender);
+//		sender
+//	}
 }
 
 impl Deref for LocalizedTransaction {
@@ -527,6 +529,7 @@ impl Deref for LocalizedTransaction {
 	}
 }
 
+/*
 /// Queued transaction with additional information.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PendingTransaction {
@@ -560,6 +563,7 @@ impl From<SignedTransaction> for PendingTransaction {
 		}
 	}
 }
+*/
 
 #[cfg(test)]
 mod tests {
